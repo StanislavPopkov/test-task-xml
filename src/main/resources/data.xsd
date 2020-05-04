@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://parsetest.ru"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://parsetest.ru"
+           attributeFormDefault="unqualified" elementFormDefault="qualified">
+
+    <xs:element name="order">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="services"/>
+            <xs:element type="xs:string" name="summa"/>
+        </xs:sequence>
+    </xs:complexType>
+    </xs:element>
+
+    <xs:element name="services">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="serv"/>
+        </xs:sequence>
+    </xs:complexType>
+    </xs:element>
+
+    <xs:element name="serv">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="serv_id" type="xs:string"/>
+            <xs:element name="bic" type="xs:long"/>
+            <xs:element type="xs:string" name="schet"/>
+            <xs:element type="xs:string" name="corr_schet"/>
+            <xs:element ref="pars">
+            </xs:element>
+            <xs:element type="xs:string" name="sys_message"/>
+        </xs:sequence>
+        <xs:attribute type="xs:boolean" name="isClosed" use="required"/>
+    </xs:complexType>
+    </xs:element>
+
+    <xs:element name="pars">
+    <xs:complexType>
+        <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="par"/>
+        </xs:sequence>
+    </xs:complexType>
+    </xs:element>
+
+    <xs:element name="par">
+    <xs:complexType mixed="true">
+        <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="par_list" />
+        </xs:sequence>
+        <xs:attribute type="xs:string" name="step" use="optional"/>
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="fullname" use="optional"/>
+        <xs:attribute type="xs:string" name="comment" use="optional"/>
+        <xs:attribute type="xs:string" name="isEditable" use="optional"/>
+        <xs:attribute type="xs:string" name="isScanable" use="optional"/>
+        <xs:attribute type="xs:string" name="isVisible" use="optional"/>
+        <xs:attribute type="xs:string" name="isRequired" use="optional"/>
+        <xs:attribute type="xs:string" name="isPrinted" use="optional"/>
+        <xs:attribute type="xs:string" name="isValidateOnLine" use="optional"/>
+        <xs:attribute type="xs:string" name="type" use="optional"/>
+        <xs:attribute type="xs:string" name="min_length" use="optional"/>
+        <xs:attribute type="xs:string" name="max_length" use="optional"/>
+        <xs:attribute type="xs:string" name="double_input" use="optional"/>
+        <xs:attribute type="xs:string" name="value" use="optional"/>
+        <xs:attribute type="xs:string" name="reg_exp" use="optional"/>
+        <xs:attribute type="xs:string" name="from_debt" use="optional"/>
+    </xs:complexType>
+    </xs:element>
+
+    <xs:element name="par_list">
+    <xs:complexType>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="value" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    </xs:element>
+
+
+</xs:schema>
