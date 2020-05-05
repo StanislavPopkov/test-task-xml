@@ -1,6 +1,5 @@
 package ru.parsertest.application;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.parsertest.application.jaxbparser.JaxbParser;
@@ -31,8 +30,6 @@ public class Main {
 
     public static void main(String[] args) {
         System.setProperty("path", "C:/Users/I am/Desktop/uchoba/j/testTaskSberbank/src/main/resources/xml/data.xml");
-//        System.out.println("${path}");
-//        System.out.println(System.getProperty("path"));
         try {
             Main main = new Main();
 
@@ -44,9 +41,9 @@ public class Main {
 
             System.out.println("Коллекция атрибутов name=\"ГРАЖДАНСТВО\":");
             List<Par> attributeNamesList = main.jaxbAttribyteNamesList(order);
-            Map<String, String> attribyteNamesMapJaxb = new HashMap<>();
-            attributeNamesList.forEach(par -> attribyteNamesMapJaxb.putAll(par.parToMap()));
-            System.out.println(attribyteNamesMapJaxb);
+            Map<String, String> attributeNamesMapJaxb = new HashMap<>();
+            attributeNamesList.forEach(par -> attributeNamesMapJaxb.putAll(par.parToMap()));
+            System.out.println(attributeNamesMapJaxb);
 
             System.out.println();
 
@@ -98,7 +95,6 @@ public class Main {
         return attributeNamesList;
     }
 
-
     public List<String> staxDocumentList() throws FileNotFoundException, XMLStreamException {
         List<String> documentListStax = new ArrayList<>();
         try (StaxStreamProcessor processor =
@@ -122,7 +118,6 @@ public class Main {
         documentListStax.sort(Comparator.naturalOrder());
         return documentListStax;
     }
-
 
     public Map<String, String>  staxAttribyteNamesMap() throws FileNotFoundException, XMLStreamException {
         Map<String, String> documentMapStax = new HashMap<>();
