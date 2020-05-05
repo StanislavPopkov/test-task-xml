@@ -1,4 +1,4 @@
-package ru.parsertest.jaxbparser;
+package ru.parsertest.application.jaxbparser;
 
 import com.google.common.io.Resources;
 import org.xml.sax.SAXException;

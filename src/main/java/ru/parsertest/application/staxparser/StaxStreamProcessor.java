@@ -1,4 +1,4 @@
-package ru.parsertest.staxparser;
+package ru.parsertest.application.staxparser;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;

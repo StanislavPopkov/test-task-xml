@@ -1,5 +1,5 @@
 
-package ru.parsertest.schema;
+package ru.parsertest.application.schema;
 
 import java.util.ArrayList;
 import java.util.HashMap;
