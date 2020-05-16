@@ -35,6 +35,10 @@ public class JaxbParser {
         return (T) unmarshaller.unmarshal(reader);
     }
 
+    public <T> T unmarshal(InputStream inputStream) throws JAXBException {
+        return (T) unmarshaller.unmarshal(inputStream);
+    }
+
     public void setSchema(String resource) {
         this.schema = Schemas.ofURL(Resources.getResource(resource));
         unmarshaller.setSchema(schema);

@@ -1,5 +1,6 @@
 package ru.parsertest.application;
 
+import com.google.common.io.Resources;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.parsertest.application.jaxbparser.JaxbParser;
@@ -14,8 +15,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,7 +29,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.setProperty("path", "C:/Users/I am/Desktop/uchoba/j/testTaskSberbank/src/main/resources/xml/data.xml");
+        System.setProperty("path", "F:/study/j/testTaskSberbank/src/main/resources/xml/data.xml");
         try {
             Main main = new Main();
 
@@ -65,7 +65,7 @@ public class Main {
             System.out.println(main.getAppRepository().delete("УДОСТОВЕРВОЕНСЛУЖ"));
 
 
-        } catch (JAXBException | FileNotFoundException e) {
+        } catch (JAXBException | IOException e) {
             e.printStackTrace();
         } catch (XMLStreamException e) {
             e.printStackTrace();
@@ -76,10 +76,10 @@ public class Main {
         return appRepository;
     }
 
-    public Order jaxbParse() throws FileNotFoundException, JAXBException {
+    public Order jaxbParse() throws IOException, JAXBException {
         JaxbParser parser = new JaxbParser(ObjectFactory.class);
         parser.setSchema("xml/data.xsd");
-        return parser.unmarshal(new FileReader( System.getProperty("path")));
+        return parser.unmarshal(Resources.getResource("xml/data.xml").openStream());
     }
 
     public List<String> jaxbDocumentList (Order order) {
@@ -95,10 +95,10 @@ public class Main {
         return attributeNamesList;
     }
 
-    public List<String> staxDocumentList() throws FileNotFoundException, XMLStreamException {
+    public List<String> staxDocumentList() throws IOException, XMLStreamException {
         List<String> documentListStax = new ArrayList<>();
         try (StaxStreamProcessor processor =
-                     new StaxStreamProcessor(new FileReader( System.getProperty("path")))) {
+                     new StaxStreamProcessor(Resources.getResource("xml/data.xml").openStream())) {
             XMLStreamReader reader = processor.getReader();
             while (reader.hasNext()) {
                 int event = reader.next();
@@ -119,10 +119,10 @@ public class Main {
         return documentListStax;
     }
 
-    public Map<String, String>  staxAttribyteNamesMap() throws FileNotFoundException, XMLStreamException {
+    public Map<String, String>  staxAttribyteNamesMap() throws IOException, XMLStreamException {
         Map<String, String> documentMapStax = new HashMap<>();
         try (StaxStreamProcessor processor =
-                     new StaxStreamProcessor(new FileReader(System.getProperty("path")))) {
+                     new StaxStreamProcessor(Resources.getResource("xml/data.xml").openStream())) {
             XMLStreamReader reader = processor.getReader();
             while (reader.hasNext()) {
                 int event = reader.next();
